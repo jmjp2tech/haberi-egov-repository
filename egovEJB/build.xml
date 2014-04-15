@@ -1,0 +1,21 @@
+<project name="build egov ejb" basedir=".">
+	<target name="assemble-jar">
+		<delete file="egov.jar"></delete>
+		<jar destfile="egov.jar">
+			<fileset dir="${basedir}/bin" includes="**/**" />
+			<fileset dir="${basedir}" includes="META-INF/**">
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="start.glassfish">
+		<exec executable="start-glassfish.bat">
+		</exec>
+	</target>
+
+	<target name="stop.glassfish">
+		<exec executable="stop-glassfish.bat">
+		</exec>
+	</target>
+
+</project>
