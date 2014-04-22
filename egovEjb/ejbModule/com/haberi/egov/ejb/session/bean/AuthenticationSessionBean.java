@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import com.haberi.egov.ejb.entities.UserEntity;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
+import com.haberi.egov.ejb.populator.UserPopulator;
 import com.haberi.egov.ejb.session.AuthenticationSessionLocal;
 import com.haberi.egov.ejb.session.AuthenticationSessionRemote;
 
@@ -21,7 +22,7 @@ public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 
 	@Override
 	public boolean createUser(UserDTO user) {
-		UserEntity userEntity = toEntity(user);
+		UserEntity userEntity = UserPopulator.getInstance().toEntity(user);
 		em.persist(userEntity);
 		return checkUserExists(user.getUserName());
 
@@ -78,7 +79,7 @@ public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 	 */
 	public UserEntity findUser(String userName) {
 		final List<UserEntity> users = em
-				.createNamedQuery("UserEntity.deleteByUserName",
+				.createNamedQuery("UserEntity.findByUserName",
 						UserEntity.class).setParameter("userName", userName)
 				.getResultList();
 
@@ -89,32 +90,9 @@ public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 		}
 	}
 
-	private UserDTO toDTO(UserEntity entity) {
-		UserDTO userDTO = null;
-
-		if (entity != null) {
-			userDTO = new UserDTO();
-			userDTO.setUserName(entity.getUserName());
-			userDTO.setPassword(entity.getPassword());
-			userDTO.setStatus(UserStatusEnum.getEnumByValue(entity.getStatus()));
-		}
-
-		return userDTO;
-	}
-
-	private UserEntity toEntity(UserDTO userDTO) {
-		UserEntity userEntity = null;
-		if (userDTO != null) {
-			userEntity = new UserEntity();
-			userEntity.setUserName(userDTO.getUserName());
-			userEntity.setPassword(userDTO.getPassword());
-			userEntity.setStatus(userDTO.getStatus().getValue());
-		}
-		return userEntity;
-	}
-
+	
 	@Override
 	public UserDTO getUser(String userName) {
-		return toDTO(findUser(userName));
+		return UserPopulator.getInstance().toDTO(findUser(userName));
 	}
 }

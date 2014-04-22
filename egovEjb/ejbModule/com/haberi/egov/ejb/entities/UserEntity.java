@@ -21,11 +21,6 @@ import javax.persistence.Table;
 })
 
 @Table(name="EGOV_USERS")
-@SequenceGenerator(name = " UserSequence",
-	sequenceName = "USER_SEQ",
-	initialValue = 100, allocationSize = 20)
-
-
 
 public class UserEntity implements Serializable {
 
@@ -35,7 +30,7 @@ public class UserEntity implements Serializable {
 	private static final long serialVersionUID = 8610622398965227262L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = " UserSequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private BigInteger id ; 
 	
 	@Column(unique=true)

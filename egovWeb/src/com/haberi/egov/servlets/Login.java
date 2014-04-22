@@ -10,25 +10,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.weld.context.ejb.Ejb;
+
 import com.google.gson.JsonObject;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
 import com.haberi.egov.ejb.session.AuthenticationSessionLocal;
 
 /**
- * Servlet implementation class Register
+ * Servlet implementation class Login
  */
-@WebServlet("/Register")
-public class Register extends HttpServlet {
+@WebServlet("/Login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private AuthenticationSessionLocal authenticationSession;
+	private AuthenticationSessionLocal authenticationSessionLocal;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Register() {
+	public Login() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -39,7 +41,28 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		final String userName = request.getParameter("username");
+		final String password = request.getParameter("password");
+		System.out.println(userName + " **** " + password);
+
+		if (userName != null && password != null) {
+			response.setContentType("application/json");
+
+			final JsonObject jsonResponse = new JsonObject();
+			
+			try {
+				if (authenticationSessionLocal.login(userName, password)) {
+					jsonResponse.addProperty("status", "Success");
+				} else {
+					jsonResponse.addProperty("status", "Failure");
+				}
+			} catch (Exception e) {
+			}finally{
+				PrintWriter out = response.getWriter();
+				out.print(jsonResponse);
+				out.flush();
+			}
+		}
 	}
 
 	/**
@@ -48,35 +71,7 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		final String userName = request.getParameter("username");
-		final String password = request.getParameter("password");
-		System.out.println(userName + " **** " + password);
-
-		if (userName != null && password != null) {
-
-			UserDTO user = new UserDTO();
-			user.setPassword(password);
-			user.setUserName(userName);
-			user.setStatus(UserStatusEnum.OFFLINE);
-
-			response.setContentType("application/json");
-			JsonObject jsonResponse = new JsonObject();
-			try {
-				boolean userCreated = authenticationSession.createUser(user);
-				if (userCreated) {
-					jsonResponse.addProperty("status", "Success");
-				} else {
-					jsonResponse.addProperty("status", "Failure");
-				}
-			} catch (Exception e) {
-				System.out.println("An error has occured");
-				jsonResponse.addProperty("status", "Exception");				
-				e.printStackTrace();
-			} finally {
-				PrintWriter out = response.getWriter();
-				out.print(jsonResponse);
-				out.flush();
-			}
-		}
+		doGet(request, response);
 	}
+
 }
