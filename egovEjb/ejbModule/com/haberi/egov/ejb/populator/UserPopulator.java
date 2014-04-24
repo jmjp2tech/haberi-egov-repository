@@ -1,6 +1,5 @@
 package com.haberi.egov.ejb.populator;
 
-import com.haberi.egov.ejb.entities.AccountEntity;
 import com.haberi.egov.ejb.entities.UserEntity;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
