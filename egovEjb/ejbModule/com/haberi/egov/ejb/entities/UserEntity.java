@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -39,6 +41,10 @@ public class UserEntity implements Serializable {
 	private String password ; 
 	
 	private String status ; 
+	
+	@OneToOne
+	@JoinColumn(name="accountId",referencedColumnName="accountId",nullable=false)
+	private AccountEntity account ; 
 	
 	public UserEntity(){
 		
@@ -99,6 +105,16 @@ public class UserEntity implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public AccountEntity getAccount() {
+		return account;
+	}
+
+	public void setAccount(AccountEntity account) {
+		this.account = account;
+	}
+	
+	
 	
 	
 }

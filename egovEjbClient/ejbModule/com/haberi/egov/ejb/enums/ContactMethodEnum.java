@@ -24,7 +24,7 @@ public enum ContactMethodEnum {
 		this.code = code;
 	} 
 	
-	public ContactMethodEnum getEnum(String inputStr){
+	public static ContactMethodEnum getEnum(String inputStr){
 		ContactMethodEnum contactMethodEnum = null ; 
 		for (ContactMethodEnum currentEnum : ContactMethodEnum.values()){
 			if(inputStr.equalsIgnoreCase(currentEnum.getCode())){

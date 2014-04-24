@@ -49,7 +49,7 @@
 			<label for="middleName">Middle name: </label> 
 			<input type="text" id="middleName" name="middleName"><br> 
 			
-			<p><label for="dateOfBirth">Date of Birth </label> <input type="text" id="dateOfBirth" name="dateOfBirth" class="hasDatepicker"></p>
+			<p><label for="dateOfBirth">Date of Birth </label> <input type="text" id="dateOfBirth" name="dateOfBirth"></p>
 			
 			<label for="sex">Sex: </label> 
 				<input type="radio" name="sex" value="male">male
@@ -87,7 +87,19 @@
 				<option value="Congo">Congo</option>
 			</select> <br>
 			
-			<p><label for="expiryDate">Expiry Date </label> <input type="text" id="expiryDate" name="expiryDate" class="hasDatepicker"></p>	
+			<p><label for="expiryDate">Expiry Date </label> <input type="text" id="expiryDate" name="expiryDate"></p>	
+			
+			
+			<label for="occupation">Occupation: </label> 
+			<select id="occupation" name="occupation">
+				<option value=public_sector>public sector</option>
+				<option value="private_sector">private sector</option>
+				<option value="military">military</option>
+				<option value="entrepreneur">entrepreneur</option>
+				<option value="diplomat">diplomat</option>
+				<option value="other">other</option>
+			</select> <br>
+			
 			
 			<span><strong>Home Address: </strong></span><br> 
 			<label for="homeStreetNumber">Street Number: </label> <input type="text" id="homeStreetNumber" name="homeStreetNumber"><br>

@@ -23,10 +23,10 @@ public enum SexEnum {
 		this.code = code;
 	}
 	
-	public SexEnum getEnum(String inputStr){
+	public static SexEnum getEnum(String inputStr){
 		SexEnum sexEnum = null ; 
 		for (SexEnum currentEnum : SexEnum.values()){
-			if(inputStr.equalsIgnoreCase(currentEnum.getCode())){
+			if(currentEnum.getCode().equalsIgnoreCase(inputStr)){
 				sexEnum = currentEnum;
 			}
 		}

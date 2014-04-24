@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
+import com.haberi.egov.ejb.entities.dto.AccountDTO;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
 import com.haberi.egov.ejb.session.AuthenticationSessionLocal;
@@ -50,10 +51,17 @@ public class Register extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		final String userName = request.getParameter("username");
 		final String password = request.getParameter("password");
+		final String accountData = request.getParameter("accountData"); 
 		System.out.println(userName + " **** " + password);
+		System.out.println("Account Data: "+ request.getParameter("accountData"));
 
 		if (userName != null && password != null) {
 
+			JsonObject accountInfo = JsonHelper.getInstance().toJsonObject(accountData);
+			if(accountInfo != null){
+				AccountDTO accountDTO = JsonHelper.getInstance().toAccountDTO(accountInfo); 
+			}
+			
 			UserDTO user = new UserDTO();
 			user.setPassword(password);
 			user.setUserName(userName);

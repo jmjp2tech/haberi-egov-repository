@@ -12,7 +12,7 @@ public class IdentityPaperPK implements Serializable {
 	 */
 	private static final long serialVersionUID = -8737472107757097178L;
 	
-	private String identityId ; 
+	private String identityNumber ; 
 	private String identityType ;  
 	private String issuingCountry ;
 	
@@ -20,20 +20,7 @@ public class IdentityPaperPK implements Serializable {
 		super();
 	}
 
-	/**
-	 * @return the identityId
-	 */
-	public String getIdentityId() {
-		return identityId;
-	}
-
-	/**
-	 * @param identityId the identityId to set
-	 */
-	public void setIdentityId(String identityId) {
-		this.identityId = identityId;
-	}
-
+	
 	/**
 	 * @return the identityType
 	 */
@@ -71,11 +58,11 @@ public class IdentityPaperPK implements Serializable {
 	public boolean equals(Object obj) {
 		try{
 			IdentityPaperPK identityPaperPK = (IdentityPaperPK)obj ;
-			final String identityId = identityPaperPK.getIdentityId();
-			final String identityType = identityPaperPK.getIdentityType();
-			final String issuingCountry = identityPaperPK.getIssuingCountry();
+			final String oidentityNumber = identityPaperPK.getIdentityNumber();
+			final String oidentityType = identityPaperPK.getIdentityType();
+			final String oissuingCountry = identityPaperPK.getIssuingCountry();
 			
-			if(this.getIdentityId().equals(identityId) && this.getIdentityType().equals(identityType)&& this.getIssuingCountry().equals(issuingCountry)){
+			if(this.getIdentityNumber().equals(oidentityNumber) && this.getIdentityType().equals(oidentityType)&& this.getIssuingCountry().equals(oissuingCountry)){
 				return true;
 			}else{
 				return false;
@@ -84,6 +71,16 @@ public class IdentityPaperPK implements Serializable {
 			e.printStackTrace();
 			return false ; 
 		}
+	}
+
+
+	public String getIdentityNumber() {
+		return identityNumber;
+	}
+
+
+	public void setIdentityNumber(String identityNumber) {
+		this.identityNumber = identityNumber;
 	}
 	
 

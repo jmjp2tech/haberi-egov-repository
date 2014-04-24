@@ -22,4 +22,15 @@ public enum IdentityTypeEnum {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	public static IdentityTypeEnum getEnum(String inputStr){
+		IdentityTypeEnum identityTypeEnum = null ; 
+		for (IdentityTypeEnum currentEnum : IdentityTypeEnum.values()){
+			if(currentEnum.getCode().equalsIgnoreCase(inputStr)){
+				identityTypeEnum = currentEnum;
+			}
+		}
+		return identityTypeEnum ; 
+	}
+	
 }

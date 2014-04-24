@@ -24,6 +24,15 @@ public enum CountryEnum {
 		this.name = name;
 	}
 	
+	public static CountryEnum getEnum(String inputStr){
+		CountryEnum countryEnum = null ; 
+		for (CountryEnum currentEnum : CountryEnum.values()){
+			if(currentEnum.getName().equalsIgnoreCase(inputStr)){
+				countryEnum = currentEnum;
+			}
+		}
+		return countryEnum ; 
+	}
 	
 	
 }

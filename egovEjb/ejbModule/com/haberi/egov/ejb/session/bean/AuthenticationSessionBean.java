@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.haberi.egov.ejb.entities.UserEntity;
+import com.haberi.egov.ejb.entities.dto.AccountDTO;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
 import com.haberi.egov.ejb.populator.UserPopulator;
@@ -23,9 +24,15 @@ public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 	@Override
 	public boolean createUser(UserDTO user) {
 		UserEntity userEntity = UserPopulator.getInstance().toEntity(user);
+		em.persist(userEntity.getAccount());
 		em.persist(userEntity);
 		return checkUserExists(user.getUserName());
 
+	}
+	
+	@Override
+	public boolean createAccount(AccountDTO account) {
+		return false ; 
 	}
 
 	private boolean checkUserExists(String userName) {
@@ -95,4 +102,5 @@ public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 	public UserDTO getUser(String userName) {
 		return UserPopulator.getInstance().toDTO(findUser(userName));
 	}
+
 }

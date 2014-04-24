@@ -23,6 +23,15 @@ public enum AddressTypeEnum {
 		this.code = code;
 	}
 	
+	public static AddressTypeEnum getEnum(String addressTypeString){
+		AddressTypeEnum addressTypeEnum = null ; 
+		for(AddressTypeEnum currentAddressTypeEnum : AddressTypeEnum.values()){
+			if(currentAddressTypeEnum.getCode().equalsIgnoreCase(addressTypeString)){
+				addressTypeEnum = currentAddressTypeEnum ; 
+			}
+		}
+		return addressTypeEnum ; 
+	}
 	
 
 }

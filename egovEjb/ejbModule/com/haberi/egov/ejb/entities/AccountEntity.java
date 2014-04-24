@@ -38,17 +38,18 @@ public class AccountEntity implements Serializable{
 	private String middleName;
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
-	private String country ; 
+	private String citizenship ; 
 	@Enumerated(EnumType.STRING)
 	private SexEnum sex;
 	
 	@OneToOne
 	@JoinColumns({
-		@JoinColumn(name="identityId", referencedColumnName="identityId"),
+		@JoinColumn(name="identityNumber", referencedColumnName="identityNumber"),
 		@JoinColumn(name="identityType", referencedColumnName="identityType" ),
 		@JoinColumn(name="issuingCountry",referencedColumnName="issuingCountry")
 	})
 	private IdentityPaperEntity identityPaper;
+	
 	private String occupation;
 	
 	@ManyToOne
@@ -79,6 +80,10 @@ public class AccountEntity implements Serializable{
 	private String mobilePhone;
 	private String homePhone;
 	private String workPhone ;
+	private String accountStatus ; 
+	
+	@OneToOne(mappedBy="account")
+	private UserEntity user; 
 	
 	
 	
@@ -134,18 +139,6 @@ public class AccountEntity implements Serializable{
 	 */
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
-	}
-	/**
-	 * @return the country
-	 */
-	public String getCountry() {
-		return country;
-	}
-	/**
-	 * @param country the country to set
-	 */
-	public void setCountry(String country) {
-		this.country = country;
 	}
 	
 	/**
@@ -295,6 +288,22 @@ public class AccountEntity implements Serializable{
 	 */
 	public void setWorkAddress(WorkAddressEntity workAddress) {
 		this.workAddress = workAddress;
+	}
+
+	public String getCitizenship() {
+		return citizenship;
+	}
+
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+
+	public String getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
 	} 
 	
 	

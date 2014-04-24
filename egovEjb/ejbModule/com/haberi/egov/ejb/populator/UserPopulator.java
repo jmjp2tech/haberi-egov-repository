@@ -1,5 +1,6 @@
 package com.haberi.egov.ejb.populator;
 
+import com.haberi.egov.ejb.entities.AccountEntity;
 import com.haberi.egov.ejb.entities.UserEntity;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
@@ -40,6 +41,9 @@ public class UserPopulator {
 			userEntity.setUserName(userDTO.getUserName());
 			userEntity.setPassword(userDTO.getPassword());
 			userEntity.setStatus(userDTO.getStatus().getValue());
+			if(userDTO.getAccountDTO() != null){
+				userEntity.setAccount(AccountPopulator.getInstance().toEntity(userDTO.getAccountDTO()));
+			}
 		}
 		return userEntity;
 	}

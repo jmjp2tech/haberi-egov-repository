@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import com.haberi.egov.ejb.enums.UserStatusEnum;
 
-
-
 public class UserDTO implements Serializable {
 
 	/**
@@ -13,17 +11,15 @@ public class UserDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 5889630551113324822L;
 
-	private String  userName ; 
-	
-	private String password ; 
-	
-	private UserStatusEnum status ; 
-	
-	
-	public UserDTO(){
-		
-	}
+	private String userName;
+	private String password;
+	private UserStatusEnum status;
+	private AccountDTO accountDTO; 
 
+	public UserDTO() {
+
+	}
+	
 	/**
 	 * @return the userName
 	 */
@@ -32,7 +28,8 @@ public class UserDTO implements Serializable {
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -46,7 +43,8 @@ public class UserDTO implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -60,9 +58,18 @@ public class UserDTO implements Serializable {
 	}
 
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *            the status to set
 	 */
 	public void setStatus(UserStatusEnum status) {
 		this.status = status;
+	}
+
+	public AccountDTO getAccountDTO() {
+		return accountDTO;
+	}
+
+	public void setAccountDTO(AccountDTO accountDTO) {
+		this.accountDTO = accountDTO;
 	}
 }
