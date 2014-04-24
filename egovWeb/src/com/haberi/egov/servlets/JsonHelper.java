@@ -84,7 +84,7 @@ public class JsonHelper {
 			addressDTO.setAppartmentNumber(jsonAddressInfo.get(AddressConstants.APPARTMENT_NUMBER).getAsString());
 			addressDTO.setZipCode(jsonAddressInfo.get(AddressConstants.ZIP_CODE).getAsString());
 			addressDTO.setCell(jsonAddressInfo.get(AddressConstants.CELL).getAsString());
-			addressDTO.setDistrict(jsonAddressInfo.get(AddressConstants.DISTICT).getAsString());
+			addressDTO.setDistrict(jsonAddressInfo.get(AddressConstants.DISTRICT).getAsString());
 			addressDTO.setProvince(jsonAddressInfo.get(AddressConstants.PROVINCE).getAsString());			
 		}
 		return addressDTO ; 

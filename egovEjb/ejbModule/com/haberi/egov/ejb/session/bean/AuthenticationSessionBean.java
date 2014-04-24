@@ -2,7 +2,7 @@ package com.haberi.egov.ejb.session.bean;
 
 import java.util.List;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,7 +14,7 @@ import com.haberi.egov.ejb.populator.UserPopulator;
 import com.haberi.egov.ejb.session.AuthenticationSessionLocal;
 import com.haberi.egov.ejb.session.AuthenticationSessionRemote;
 
-@Stateful(name = "AuthenticationSession")
+@Stateless(name = "AuthenticationSession")
 public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 		AuthenticationSessionRemote {
 
@@ -24,8 +24,7 @@ public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 	@Override
 	public boolean createUser(UserDTO user) {
 		UserEntity userEntity = UserPopulator.getInstance().toEntity(user);
-		em.persist(userEntity.getAccount());
-		em.persist(userEntity);
+		em.merge(userEntity);
 		return checkUserExists(user.getUserName());
 
 	}

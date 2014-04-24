@@ -55,17 +55,16 @@ public class Register extends HttpServlet {
 		System.out.println(userName + " **** " + password);
 		System.out.println("Account Data: "+ request.getParameter("accountData"));
 
-		if (userName != null && password != null) {
-
-			JsonObject accountInfo = JsonHelper.getInstance().toJsonObject(accountData);
-			if(accountInfo != null){
-				AccountDTO accountDTO = JsonHelper.getInstance().toAccountDTO(accountInfo); 
-			}
-			
+		if (userName != null && password != null) {			
 			UserDTO user = new UserDTO();
 			user.setPassword(password);
 			user.setUserName(userName);
 			user.setStatus(UserStatusEnum.OFFLINE);
+			JsonObject accountInfo = JsonHelper.getInstance().toJsonObject(accountData);
+			if(accountInfo != null){
+				AccountDTO accountDTO = JsonHelper.getInstance().toAccountDTO(accountInfo); 
+				user.setAccountDTO(accountDTO);
+			}
 
 			response.setContentType("application/json");
 			JsonObject jsonResponse = new JsonObject();

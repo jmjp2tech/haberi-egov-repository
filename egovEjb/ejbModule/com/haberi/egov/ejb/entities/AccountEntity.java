@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +24,7 @@ import com.haberi.egov.ejb.enums.SexEnum;
 
 @Entity
 @Table(name="EGOV_ACCOUNTS")
+@SequenceGenerator(name="ACCOUNT_SEQ_GEN", initialValue=1)
 public class AccountEntity implements Serializable{
 	
 	/**
@@ -31,7 +34,7 @@ public class AccountEntity implements Serializable{
 	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="ACCOUNT_SEQ_GEN")
 	private BigInteger accountId;
 	private String firstName;
 	private String lastName;
@@ -42,7 +45,7 @@ public class AccountEntity implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private SexEnum sex;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumns({
 		@JoinColumn(name="identityNumber", referencedColumnName="identityNumber"),
 		@JoinColumn(name="identityType", referencedColumnName="identityType" ),
@@ -52,7 +55,7 @@ public class AccountEntity implements Serializable{
 	
 	private String occupation;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumns({
 		@JoinColumn(name="homeStreetNumber" , referencedColumnName="streetNumber"),
 		@JoinColumn(name="homeStreetName" , referencedColumnName="streetName"),
@@ -63,7 +66,7 @@ public class AccountEntity implements Serializable{
 		@JoinColumn(name="homeProvince" , referencedColumnName="province"),
 	})
 	private HomeAddressEntity homeAddress;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumns({
 		@JoinColumn(name="workStreetNumber" , referencedColumnName="streetNumber"),
 		@JoinColumn(name="workStreetName" , referencedColumnName="streetName"),

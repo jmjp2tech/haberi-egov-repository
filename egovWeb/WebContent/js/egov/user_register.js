@@ -15,10 +15,12 @@ $(document).ready(function(){
 		var identityType =  $("input[name='identityType']:checked").val();
 		var issuingCountry = $("select[id='issuingCountry'] option:selected").val();
 		var expiryDate = $("#expiryDate").val();
+		var occupation=$("select[id='occupation'] option:selected").val();
 		
 		var homeStreetNumber = $("#homeStreetNumber").val();
 		var homeStreetName = $("#homeStreetName").val();
 		var homeAppartmentNumber = $("#homeAppartmentNumber").val();
+		var homeZipCode = $("#homeZipCode").val();		
 		var homeCell = $("#homeCell").val();
 		var homeDistrict = $("#homeDistrict").val();
 		var homeProvince = $("#homeProvince").val();
@@ -26,6 +28,7 @@ $(document).ready(function(){
 		var workStreetNumber = $("#workStreetNumber").val();
 		var workStreetName = $("#workStreetName").val();
 		var workAppartmentNumber = $("#workAppartmentNumber").val();
+		var workZipCode = $("#workZipCode").val();
 		var workCell = $("#workCell").val();
 		var workDistrict = $("#workDistrict").val();
 		var workProvince = $("#workProvince").val();
@@ -50,21 +53,24 @@ $(document).ready(function(){
 					"issuingCountry":issuingCountry,
 					"expiryDate":expiryDate
 				},
+				"occupation":occupation,
 				"homeAddress":{
-					"homeStreetNumber":homeStreetNumber,
-					"homeStreetName":homeStreetName,
-					"homeAppartmentNumber":homeAppartmentNumber,
-					"homeCell":homeCell,
-					"homeDistrict":homeDistrict,
-					"homeProvince":homeProvince
+					"streetNumber":homeStreetNumber,
+					"streetName":homeStreetName,
+					"appartmentNumber":homeAppartmentNumber,
+					"zipCode":homeZipCode,
+					"cell":homeCell,
+					"district":homeDistrict,
+					"province":homeProvince
 				},
 				"workAddress":{
-					"workStreetNumber":workStreetNumber,
-					"workStreetName":workStreetName,
-					"workAppartmentNumber":workAppartmentNumber,
-					"workCell":workCell,
-					"workDistrict":workDistrict,
-					"workProvince":workProvince
+					"streetNumber":workStreetNumber,
+					"streetName":workStreetName,
+					"appartmentNumber":workAppartmentNumber,
+					"zipCode":workZipCode,
+					"cell":workCell,
+					"district":workDistrict,
+					"province":workProvince
 				},
 				"email":email,
 				"mobilePhone":mobilePhone,

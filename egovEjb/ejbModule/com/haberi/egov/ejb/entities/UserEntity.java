@@ -3,6 +3,7 @@ package com.haberi.egov.ejb.entities;
 import java.io.Serializable;
 import java.math.BigInteger;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ import javax.persistence.Table;
 
 @Table(name="EGOV_USERS")
 
+@SequenceGenerator(name="USER_SEQ_GEN", initialValue=1)
 public class UserEntity implements Serializable {
 
 	/**
@@ -32,89 +34,73 @@ public class UserEntity implements Serializable {
 	private static final long serialVersionUID = 8610622398965227262L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="USER_SEQ_GEN")
 	private BigInteger id ; 
 	
 	@Column(unique=true)
 	private String  userName ; 
-	
-	private String password ; 
-	
+	private String password ; 	
 	private String status ; 
 	
-	@OneToOne
-	@JoinColumn(name="accountId",referencedColumnName="accountId",nullable=false)
+	@OneToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name="accountId",referencedColumnName="accountId")
 	private AccountEntity account ; 
 	
 	public UserEntity(){
-		
 	}
-
 	/**
 	 * @return the id
 	 */
 	public BigInteger getId() {
 		return id;
 	}
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-
 	/**
 	 * @return the userName
 	 */
 	public String getUserName() {
 		return userName;
 	}
-
 	/**
 	 * @param userName the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 	/**
 	 * @return the password
 	 */
 	public String getPassword() {
 		return password;
 	}
-
 	/**
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	/**
 	 * @return the status
 	 */
 	public String getStatus() {
 		return status;
 	}
-
 	/**
 	 * @param status the status to set
 	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	
 	public AccountEntity getAccount() {
 		return account;
 	}
-
 	public void setAccount(AccountEntity account) {
 		this.account = account;
-	}
-	
-	
-	
-	
+	}	
 }
