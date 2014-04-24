@@ -66,6 +66,7 @@ public class AccountEntity implements Serializable{
 		@JoinColumn(name="homeProvince" , referencedColumnName="province"),
 	})
 	private HomeAddressEntity homeAddress;
+	
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumns({
 		@JoinColumn(name="workStreetNumber" , referencedColumnName="streetNumber"),
