@@ -6,8 +6,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>User Register</title>
 
+	<link rel="stylesheet" href="../css/egov/common.css">
+	
 	<script type="text/javascript" src="../js/core/jquery.2.1.0.js"></script>
 	<script type="text/javascript" src="../js/core/jquery.json-2.4.min.js"></script>
+	<script type="text/javascript" src="../js/egov/common.js"></script>
 	<script type="text/javascript" src="../js/egov/user_login.js"></script>
 	
 </head>
@@ -19,6 +22,8 @@
 		
 		<label for="password">Password:</label>
 		<input type="text" id="password" name="password" /><br /> 
+		
+		<div id="login_error" class="error-div hidden"></div>
 		
 		<br /> 
 		<input type="button" id="submit_login_form" value="Login" />
