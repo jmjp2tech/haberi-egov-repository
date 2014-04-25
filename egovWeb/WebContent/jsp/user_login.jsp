@@ -13,6 +13,7 @@
 </head>
 <body>
 	<form id="user_register_form">
+	
 		<label for="username">Username: </label> 
 		<input type="text" id="username" name="username" /><br /> 
 		
@@ -20,7 +21,7 @@
 		<input type="text" id="password" name="password" /><br /> 
 		
 		<br /> 
-		<input type="button" id="submit_login_form" value="Logint" />
+		<input type="button" id="submit_login_form" value="Login" />
 
 	</form>
 </body>

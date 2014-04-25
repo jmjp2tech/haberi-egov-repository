@@ -11,13 +11,16 @@ $(document).ready(function(){
 				data : jsonData,
 		        dataType:"json",
 				success: function(result){
-					//$(window).attr("location", "http://www.yahoo.com");
-					window.location.href = "http://localhost:8080/egovWeb/jsp/user_homepage.jsp";
+					if(isNotNull(result) && result.status=="Success"){
+						window.location.href = "http://localhost:8080/egovWeb/jsp/user_homepage.jsp";
+					}else{
+						loginErrorMessage
+					}
 				},
 				error: function(){
 					alert("An error has occured !!! ");
 				}
-				}
+			}
 		); 
 	});
 });

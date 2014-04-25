@@ -43,7 +43,6 @@ public class Login extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		final String userName = request.getParameter("username");
 		final String password = request.getParameter("password");
-		System.out.println(userName + " **** " + password);
 
 		if (userName != null && password != null) {
 			response.setContentType("application/json");
@@ -55,6 +54,7 @@ public class Login extends HttpServlet {
 					jsonResponse.addProperty("status", "Success");
 				} else {
 					jsonResponse.addProperty("status", "Failure");
+					jsonResponse.addProperty("loginError", "Either the username or password is wrong");
 				}
 			} catch (Exception e) {
 			}finally{

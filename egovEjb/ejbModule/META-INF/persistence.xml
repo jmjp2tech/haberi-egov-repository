@@ -5,13 +5,13 @@
 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="EgovPersistenceUnit" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>jdbc/mysql</jta-data-source>
+		<jta-data-source>java:app/jdbc/mysql_ds</jta-data-source>
 		<class>com.haberi.egov.ejb.entities.UserEntity</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode" value="both"/>
-			<property name="eclipselink.application-location" value="c:/javaEE/"/>
+			<property name="eclipselink.application-location" value="c:/dev/jpa/"/>
 		</properties>
 	</persistence-unit>
 </persistence>
