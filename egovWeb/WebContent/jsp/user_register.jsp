@@ -147,10 +147,8 @@
 				<input type="radio" name="contactMethod" value="email" id="email"><label for="email">Email</label>
 				<input type="radio" name="contactMethod" value="work" id="work"><label for="work">Work Address</label>
 				<input type="radio" name="contactMethod" value="home" id="home"><label for="home">Home Address</label>
-				<input type="radio" name="contactMethod" value="sms" id="sms"><label for="sms">Mobile SMS</label><br> 
-						
+				<input type="radio" name="contactMethod" value="sms" id="sms"><label for="sms">Mobile SMS</label><br> 		
 		</fieldset>
-		
 		
 		<br> 
 		<input type="button" id="submit_register_form" value="Create Account">

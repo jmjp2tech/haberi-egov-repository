@@ -11,9 +11,12 @@
 	<script type="text/javascript" src="../js/core/jquery.2.1.0.js"></script>
 	<script type="text/javascript" src="../js/core/jquery.json-2.4.min.js"></script>
 	<script type="text/javascript" src="../js/egov/common.js"></script>
-	<script type="text/javascript" src="../js/egov/user_login.js"></script>
+	<script type="text/javascript" src="../js/egov/user_homepage.js"></script>
 	
 </head>
 <body>
+	<div id="account_info">
+		
+	</div>
 </body>
 </html>
