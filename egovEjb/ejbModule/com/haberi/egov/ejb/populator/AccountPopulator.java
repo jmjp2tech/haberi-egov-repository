@@ -1,11 +1,18 @@
 package com.haberi.egov.ejb.populator;
 
 import com.haberi.egov.ejb.constants.AccountConstants;
+import com.haberi.egov.ejb.constants.AddressConstants;
 import com.haberi.egov.ejb.entities.AccountEntity;
 import com.haberi.egov.ejb.entities.HomeAddressEntity;
 import com.haberi.egov.ejb.entities.WorkAddressEntity;
 import com.haberi.egov.ejb.entities.dto.AccountDTO;
+import com.haberi.egov.ejb.enums.AccountStatusEnum;
 import com.haberi.egov.ejb.enums.AddressTypeEnum;
+import com.haberi.egov.ejb.enums.ContactMethodEnum;
+import com.haberi.egov.ejb.enums.CountryEnum;
+import com.haberi.egov.ejb.enums.OccupationEnum;
+import com.haberi.egov.ejb.enums.SexEnum;
+import com.haberi.egov.ejb.enums.UserTypeEnum;
 
 public class AccountPopulator {
 
@@ -62,8 +69,31 @@ private static AccountPopulator instance  ;
 		return accountEntity ; 
 	}
 	
-	public  AccountDTO toDTO(){
+	public  AccountDTO toDTO(AccountEntity accountEntity){
 		AccountDTO accountDTO = null ; 
+		
+		if(accountEntity != null){
+			accountDTO = new AccountDTO(); 
+			accountDTO.setFirstName(accountEntity.getFirstName());
+			accountDTO.setLastName(accountEntity.getLastName());
+			accountDTO.setMiddleName(accountEntity.getMiddleName());
+			accountDTO.setDateOfBirth(accountEntity.getDateOfBirth());
+			accountDTO.setPlaceOfBith(accountEntity.getPlaceOfBirth());
+			accountDTO.setFather(accountEntity.getFather());
+			accountDTO.setMother(accountEntity.getMother());
+			accountDTO.setCitizenship(CountryEnum.getEnum(accountEntity.getCitizenship()));
+			accountDTO.setSex(accountEntity.getSex());
+			accountDTO.setOccupation(OccupationEnum.getEnum(accountEntity.getOccupation()));
+			accountDTO.setIdentityPaper(IdentityPaperPopulator.getInstance().toDTO(accountEntity.getIdentityPaper()));
+			accountDTO.getAddresses().put(AccountConstants.HOME_ADDRESS, AddressPopulator.getInstance().toDTO(accountEntity.getHomeAddress()));
+			accountDTO.getAddresses().put(AccountConstants.WORK_ADDRESS, AddressPopulator.getInstance().toDTO(accountEntity.getWorkAddress()));
+			accountDTO.setUserType(UserTypeEnum.getEnum(accountEntity.getUserType()));
+			accountDTO.setEmail(accountEntity.getEmail());
+			accountDTO.setHomePhone(accountEntity.getHomePhone());
+			accountDTO.setWorkPhone(accountEntity.getWorkPhone());
+			accountDTO.setMobilePhone(accountEntity.getMobilePhone());
+			accountDTO.setContactMethod(ContactMethodEnum.getEnum(accountEntity.getContactMethod()));		
+		}
 		
 		return accountDTO;
 	}

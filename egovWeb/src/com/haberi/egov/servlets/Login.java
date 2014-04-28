@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.weld.context.ejb.Ejb;
-
 import com.google.gson.JsonObject;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
@@ -50,8 +48,11 @@ public class Login extends HttpServlet {
 			final JsonObject jsonResponse = new JsonObject();
 			
 			try {
-				if (authenticationSessionLocal.login(userName, password)) {
+				
+				UserDTO returnedUser =  authenticationSessionLocal.login(userName, password); 
+				if (returnedUser != null && UserStatusEnum.ONLINE.equals(returnedUser.getStatus())) {
 					jsonResponse.addProperty("status", "Success");
+					jsonResponse.add("accountData", JsonHelper.getInstance().toJsonObject(returnedUser.getAccountDTO()));
 				} else {
 					jsonResponse.addProperty("status", "Failure");
 					jsonResponse.addProperty("loginError", "Either the username or password is wrong");

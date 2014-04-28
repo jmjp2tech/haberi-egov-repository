@@ -6,6 +6,9 @@ public class AccountConstants {
 	public static final String LAST_NAME="lastName";
 	public static final String MIDDLE_NAME="middleName";
 	public static final String DATE_OF_BIRTH="dateOfBirth";
+	public static final String PLACE_OF_BIRTH="placeOfBirth";
+	public static final String MOTHER="mother";
+	public static final String FATHER="father";
 	public static final String CITIZENSHIP="citizenship";
 	public static final String SEX="sex";
 	public static final String IDENTITY_PAPER="identityPaper";

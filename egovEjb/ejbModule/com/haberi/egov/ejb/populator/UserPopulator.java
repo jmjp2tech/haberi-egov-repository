@@ -20,14 +20,17 @@ public class UserPopulator {
 		return instance  ; 
 	}
 	
-	public UserDTO toDTO(UserEntity entity) {
+	public UserDTO toDTO(UserEntity userEntity) {
 		UserDTO userDTO = null;
 
-		if (entity != null) {
+		if (userEntity != null) {
 			userDTO = new UserDTO();
-			userDTO.setUserName(entity.getUserName());
-			userDTO.setPassword(entity.getPassword());
-			userDTO.setStatus(UserStatusEnum.getEnumByValue(entity.getStatus()));
+			userDTO.setUserName(userEntity.getUserName());
+			userDTO.setPassword(userEntity.getPassword());
+			userDTO.setStatus(UserStatusEnum.getEnumByValue(userEntity.getStatus()));
+			if(userEntity.getAccount() != null){
+				userDTO.setAccountDTO(AccountPopulator.getInstance().toDTO(userEntity.getAccount()));
+			}
 		}
 
 		return userDTO;

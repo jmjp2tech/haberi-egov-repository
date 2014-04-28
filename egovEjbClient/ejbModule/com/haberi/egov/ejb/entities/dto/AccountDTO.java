@@ -23,6 +23,9 @@ public class AccountDTO implements Serializable {
 	private String lastName;
 	private String middleName;
 	private Date dateOfBirth;
+	private String placeOfBith; 
+	private String father;
+	private String mother; 
 	private CountryEnum citizenship ; 
 	private SexEnum sex;
 	private IdentityPaperDTO identityPaper;
@@ -57,6 +60,42 @@ public class AccountDTO implements Serializable {
 	}
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+	/**
+	 * @return the placeOfBith
+	 */
+	public String getPlaceOfBith() {
+		return placeOfBith;
+	}
+	/**
+	 * @param placeOfBith the placeOfBith to set
+	 */
+	public void setPlaceOfBith(String placeOfBith) {
+		this.placeOfBith = placeOfBith;
+	}
+	/**
+	 * @return the father
+	 */
+	public String getFather() {
+		return father;
+	}
+	/**
+	 * @param father the father to set
+	 */
+	public void setFather(String father) {
+		this.father = father;
+	}
+	/**
+	 * @return the mother
+	 */
+	public String getMother() {
+		return mother;
+	}
+	/**
+	 * @param mother the mother to set
+	 */
+	public void setMother(String mother) {
+		this.mother = mother;
 	}
 	public SexEnum getSex() {
 		return sex;

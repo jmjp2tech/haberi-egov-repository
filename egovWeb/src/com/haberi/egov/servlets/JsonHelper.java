@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.haberi.egov.ejb.constants.AccountConstants;
@@ -112,5 +113,59 @@ public class JsonHelper {
 	private Date getDate(String dateString , String dateFormat) throws ParseException{
 		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat); 
 		return formatter.parse(dateString);
+	}
+	
+	public JsonObject toJsonObject(AccountDTO accountDTO){
+		JsonObject jsonObject = new JsonObject(); 
+		
+		if(accountDTO != null){
+			jsonObject.addProperty(AccountConstants.FIRST_NAME, accountDTO.getFirstName());
+			jsonObject.addProperty(AccountConstants.LAST_NAME, accountDTO.getLastName());
+			jsonObject.addProperty(AccountConstants.MIDDLE_NAME, accountDTO.getMiddleName());
+			jsonObject.addProperty(AccountConstants.DATE_OF_BIRTH, new SimpleDateFormat(DateConstants.DEFAULT_FORMAT).format(accountDTO.getDateOfBirth()));
+			jsonObject.addProperty(AccountConstants.PLACE_OF_BIRTH, accountDTO.getPlaceOfBith());
+			jsonObject.addProperty(AccountConstants.FATHER, accountDTO.getFather());
+			jsonObject.addProperty(AccountConstants.MOTHER, accountDTO.getMother());
+			jsonObject.addProperty(AccountConstants.CITIZENSHIP, accountDTO.getCitizenship().getName());
+			jsonObject.addProperty(AccountConstants.SEX, accountDTO.getSex().getCode());
+			jsonObject.addProperty(AccountConstants.OCCUPATION, accountDTO.getOccupation().getCode());
+			jsonObject.add(AccountConstants.IDENTITY_PAPER, this.toJsonObject(accountDTO.getIdentityPaper()));
+			jsonObject.add(AccountConstants.HOME_ADDRESS, toJsonObject(accountDTO.getAddresses().get(AccountConstants.HOME_ADDRESS)));
+			jsonObject.add(AccountConstants.WORK_ADDRESS, toJsonObject(accountDTO.getAddresses().get(AccountConstants.WORK_ADDRESS)));
+			jsonObject.addProperty(AccountConstants.EMAIL, accountDTO.getEmail());
+			jsonObject.addProperty(AccountConstants.HOME_PHONE, accountDTO.getHomePhone());
+			jsonObject.addProperty(AccountConstants.WORK_PHONE, accountDTO.getWorkPhone());
+			jsonObject.addProperty(AccountConstants.MOBILE_PHONE, accountDTO.getMobilePhone());
+			jsonObject.addProperty(AccountConstants.CONTACT_METHOD, accountDTO.getContactMethod().getCode());
+		}
+		
+		return jsonObject;
+	}
+
+	private JsonObject toJsonObject(AddressDTO addressDTO) {
+		JsonObject jsonObject = new JsonObject(); 
+		
+		if(addressDTO != null){
+			jsonObject.addProperty(AddressConstants.STREET_NUMBER, addressDTO.getStreetNumber());
+			jsonObject.addProperty(AddressConstants.STREET_NAME, addressDTO.getStreetName());
+			jsonObject.addProperty(AddressConstants.APPARTMENT_NUMBER,addressDTO.getAppartmentNumber());
+			jsonObject.addProperty(AddressConstants.ZIP_CODE, addressDTO.getZipCode());
+			jsonObject.addProperty(AddressConstants.CELL, addressDTO.getCell());
+			jsonObject.addProperty(AddressConstants.DISTRICT, addressDTO.getDistrict());
+			jsonObject.addProperty(AddressConstants.PROVINCE, addressDTO.getProvince());
+		}
+		return jsonObject;
+	}
+
+	public JsonObject toJsonObject(IdentityPaperDTO identityPaperDTO) {
+		
+		JsonObject jsonObject = new JsonObject(); 
+		if(identityPaperDTO != null){
+			jsonObject.addProperty(IdentityPaperConstants.IDENTITY_NUMBER, identityPaperDTO.getIdentityNumber());
+			jsonObject.addProperty(IdentityPaperConstants.IDENTITY_TYPE, identityPaperDTO.getIdentityType().getCode());
+			jsonObject.addProperty(IdentityPaperConstants.ISSUING_COUNTRY, identityPaperDTO.getIssuingCountry().getName());
+			jsonObject.addProperty(IdentityPaperConstants.EXPIRY_DATE, new SimpleDateFormat(DateConstants.DEFAULT_FORMAT).format(identityPaperDTO.getExpiryDate()));
+		}
+		return jsonObject;
 	}
 }

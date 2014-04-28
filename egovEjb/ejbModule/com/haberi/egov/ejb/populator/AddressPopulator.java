@@ -54,4 +54,20 @@ public class AddressPopulator {
 		
 	}
 
+	public AddressDTO toDTO(AddressEntity addressEntity) {
+		AddressDTO addressDTO = null ; 
+		if(addressEntity != null && addressEntity.getAddressPK()!= null){
+			AddressPK addressPK = addressEntity.getAddressPK(); 
+			addressDTO = new AddressDTO() ; 
+			addressDTO.setStreetNumber(addressPK.getStreetNumber());
+			addressDTO.setStreetName(addressPK.getStreetName());
+			addressDTO.setAppartmentNumber(addressPK.getAppartmentNumber());
+			addressDTO.setZipCode(addressPK.getZipCode());
+			addressDTO.setCell(addressPK.getCell());
+			addressDTO.setDistrict(addressPK.getDistrict());
+			addressDTO.setProvince(addressPK.getProvince());
+		}
+		return addressDTO ; 
+	}
+
 }

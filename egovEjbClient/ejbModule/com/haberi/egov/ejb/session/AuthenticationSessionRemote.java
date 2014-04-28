@@ -12,7 +12,7 @@ public interface AuthenticationSessionRemote {
 
 	public boolean deleteUser(String userName);
 
-	public boolean login(String userName, String password);
+	public UserDTO login(String userName, String password);
 
 	public boolean logoff(String userName);
 

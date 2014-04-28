@@ -6,10 +6,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.haberi.egov.ejb.entities.AccountEntity;
 import com.haberi.egov.ejb.entities.UserEntity;
 import com.haberi.egov.ejb.entities.dto.AccountDTO;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
+import com.haberi.egov.ejb.populator.AccountPopulator;
 import com.haberi.egov.ejb.populator.UserPopulator;
 import com.haberi.egov.ejb.session.AuthenticationSessionLocal;
 import com.haberi.egov.ejb.session.AuthenticationSessionRemote;
@@ -62,15 +64,15 @@ public class AuthenticationSessionBean implements AuthenticationSessionLocal,
 	}
 
 	@Override
-	public boolean login(String userName, String password) {
+	public UserDTO login(String userName, String password) {
 
 		UserEntity user = findUser(userName);
 		if (user != null && user.getPassword().equals(password)) {
 			user.setStatus(UserStatusEnum.ONLINE.getValue());
 			em.merge(user);
-			return true;
+			return UserPopulator.getInstance().toDTO(user);
 		} else {
-			return false;
+			return null;
 		}
 	}
 

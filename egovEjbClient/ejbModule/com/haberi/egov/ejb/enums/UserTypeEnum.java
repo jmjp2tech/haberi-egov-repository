@@ -23,7 +23,7 @@ public void setCode(String code) {
 	this.code = code;
 }
 
-public UserTypeEnum getEnum(String inputStr){
+public static UserTypeEnum getEnum(String inputStr){
 	UserTypeEnum userTypeEnum = null ; 
 	for (UserTypeEnum currentEnum : UserTypeEnum.values()){
 		if(inputStr.equalsIgnoreCase(currentEnum.getCode())){

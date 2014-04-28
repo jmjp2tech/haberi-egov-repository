@@ -1,7 +1,7 @@
 package com.haberi.egov.ejb.enums;
 
 public enum IdentityTypeEnum {
-	IDENTITY_CARD("identity_card") , PASSPORT("passport"), LAISSER_PASSER("laisser_passer"),DRIVING_LICENSE("driving_license");
+	IDENTITY_CARD("identity_card") , PASSPORT("passport"), LAISSER_PASSER("laisser_passer"),DRIVING_LICENSE("driving_license"),BIRTH_CERTIFICATE("birth_certificate");
 	
 	private String code ; 
 	

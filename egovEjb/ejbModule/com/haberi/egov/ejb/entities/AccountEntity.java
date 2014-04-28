@@ -41,6 +41,9 @@ public class AccountEntity implements Serializable{
 	private String middleName;
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
+	private String placeOfBirth; 
+	private String father ; 
+	private String mother; 
 	private String citizenship ; 
 	@Enumerated(EnumType.STRING)
 	private SexEnum sex;
@@ -145,6 +148,62 @@ public class AccountEntity implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 	}
 	
+	/**
+	 * @return the placeOfBirth
+	 */
+	public String getPlaceOfBirth() {
+		return placeOfBirth;
+	}
+
+	/**
+	 * @param placeOfBirth the placeOfBirth to set
+	 */
+	public void setPlaceOfBirth(String placeOfBirth) {
+		this.placeOfBirth = placeOfBirth;
+	}
+
+	/**
+	 * @return the father
+	 */
+	public String getFather() {
+		return father;
+	}
+
+	/**
+	 * @param father the father to set
+	 */
+	public void setFather(String father) {
+		this.father = father;
+	}
+
+	/**
+	 * @return the mother
+	 */
+	public String getMother() {
+		return mother;
+	}
+
+	/**
+	 * @param mother the mother to set
+	 */
+	public void setMother(String mother) {
+		this.mother = mother;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public UserEntity getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+
 	/**
 	 * @return the identityPaper
 	 */

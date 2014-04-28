@@ -1,6 +1,5 @@
 package com.haberi.egov.ejb.enums;
 
-import java.io.Serializable;
 
 public enum AccountStatusEnum{
 	ACTIVE("active"), 
