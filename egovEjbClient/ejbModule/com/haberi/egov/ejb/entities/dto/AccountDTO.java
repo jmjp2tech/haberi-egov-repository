@@ -1,6 +1,7 @@
 package com.haberi.egov.ejb.entities.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
@@ -19,6 +20,7 @@ public class AccountDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = -810006617859327854L;
 	
+	private BigInteger id; 
 	private String firstName;
 	private String lastName;
 	private String middleName;
@@ -171,5 +173,11 @@ public class AccountDTO implements Serializable {
 	}
 	public void setWorkAddress(AddressDTO workAddress){
 		getAddresses().put(AccountConstants.WORK_ADDRESS, workAddress);
+	}
+	public BigInteger getId() {
+		return id;
+	}
+	public void setId(BigInteger id) {
+		this.id = id;
 	}
 }

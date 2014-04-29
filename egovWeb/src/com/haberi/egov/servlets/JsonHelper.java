@@ -129,14 +129,15 @@ public class JsonHelper {
 			jsonObject.addProperty(AccountConstants.CITIZENSHIP, accountDTO.getCitizenship().getName());
 			jsonObject.addProperty(AccountConstants.SEX, accountDTO.getSex().getCode());
 			jsonObject.addProperty(AccountConstants.OCCUPATION, accountDTO.getOccupation().getCode());
-			jsonObject.add(AccountConstants.IDENTITY_PAPER, this.toJsonObject(accountDTO.getIdentityPaper()));
-			jsonObject.add(AccountConstants.HOME_ADDRESS, toJsonObject(accountDTO.getAddresses().get(AccountConstants.HOME_ADDRESS)));
-			jsonObject.add(AccountConstants.WORK_ADDRESS, toJsonObject(accountDTO.getAddresses().get(AccountConstants.WORK_ADDRESS)));
 			jsonObject.addProperty(AccountConstants.EMAIL, accountDTO.getEmail());
 			jsonObject.addProperty(AccountConstants.HOME_PHONE, accountDTO.getHomePhone());
 			jsonObject.addProperty(AccountConstants.WORK_PHONE, accountDTO.getWorkPhone());
 			jsonObject.addProperty(AccountConstants.MOBILE_PHONE, accountDTO.getMobilePhone());
 			jsonObject.addProperty(AccountConstants.CONTACT_METHOD, accountDTO.getContactMethod().getCode());
+			jsonObject.add(AccountConstants.IDENTITY_PAPER, this.toJsonObject(accountDTO.getIdentityPaper()));
+			jsonObject.add(AccountConstants.HOME_ADDRESS, toJsonObject(accountDTO.getAddresses().get(AccountConstants.HOME_ADDRESS)));
+			jsonObject.add(AccountConstants.WORK_ADDRESS, toJsonObject(accountDTO.getAddresses().get(AccountConstants.WORK_ADDRESS)));
+			
 		}
 		
 		return jsonObject;

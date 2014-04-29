@@ -74,6 +74,7 @@ private static AccountPopulator instance  ;
 		
 		if(accountEntity != null){
 			accountDTO = new AccountDTO(); 
+			accountDTO.setId(accountEntity.getAccountId());
 			accountDTO.setFirstName(accountEntity.getFirstName());
 			accountDTO.setLastName(accountEntity.getLastName());
 			accountDTO.setMiddleName(accountEntity.getMiddleName());

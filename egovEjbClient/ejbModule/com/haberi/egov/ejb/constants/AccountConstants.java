@@ -21,4 +21,6 @@ public class AccountConstants {
 	public static final String MOBILE_PHONE="mobilePhone";
 	public static final String HOME_PHONE="homePhone";
 	public static final String WORK_PHONE="workPhone";
+	
+	public static final String ACCOUNT_INFO="accountInfo";
 }

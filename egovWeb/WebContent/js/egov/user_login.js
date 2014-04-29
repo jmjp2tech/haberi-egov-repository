@@ -16,7 +16,7 @@ $(document).ready(function(){
 				success: function(result){
 					if(isNotNull(result)){
 						if(result.status=="Success"){
-							sessionStorage.setItem("accountData",result.accountData);
+							sessionStorage.setItem("accountData",JSON.stringify(result.accountData));
 							window.location.href = "http://localhost:8080/egovWeb/jsp/user_homepage.jsp";
 						}else{
 							var loginErrorMessage = result.loginError;
