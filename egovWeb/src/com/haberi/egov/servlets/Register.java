@@ -68,6 +68,7 @@ public class Register extends HttpServlet {
 
 			response.setContentType("application/json");
 			JsonObject jsonResponse = new JsonObject();
+			
 			try {
 				boolean userCreated = authenticationSession.createUser(user);
 				if (userCreated) {

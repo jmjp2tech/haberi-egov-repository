@@ -2,7 +2,9 @@ package com.haberi.egov.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
@@ -12,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 import com.google.gson.JsonObject;
 import com.haberi.egov.ejb.constants.AccountConstants;
@@ -46,6 +50,12 @@ public class Login extends HttpServlet {
 		final String userName = request.getParameter("username");
 		final String password = request.getParameter("password");
 
+		List<String> myList = new ArrayList<String>(); 
+		
+		if(CollectionUtils.isEmpty(myList)){
+			System.out.println("The list is empty");
+		}
+		
 		if (userName != null && password != null) {
 			response.setContentType("application/json");
 
