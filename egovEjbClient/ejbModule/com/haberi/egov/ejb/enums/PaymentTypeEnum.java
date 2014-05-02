@@ -3,7 +3,7 @@ package com.haberi.egov.ejb.enums;
 import org.apache.commons.lang3.StringUtils;
 
 public enum PaymentTypeEnum {
-	CREDIT_CARD("credit card"),MOBILE_MONEY("mobile_money"),TIGO_CASH("tigo_cash"),BANK_TRANSFER("bank_transfer"),COUNTER("counter"); 
+	CREDIT_CARD("credit card"),WIRE_TRANSFER("wire_transfer"),MOBILE_MONEY("mobile_money"),COUNTER("counter"); 
 	
 	private String code ; 
 	
