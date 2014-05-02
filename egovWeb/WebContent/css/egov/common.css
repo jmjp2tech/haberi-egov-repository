@@ -1,11 +1,40 @@
-.hidden{
+.hidden {
 	display: none
 }
 
-.error-div{
+.error-div {
 	color: red;
 }
 
-.strong{
+.strong,fieldset legend {
 	font-weight: bold;
+}
+
+fieldset {
+	border-radius: 10px;
+}
+
+.payment-fieldset {
+	width: 35%;
+}
+
+button.submit-button {
+	border-radius: 5px;
+	min-height: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+button.submit-button:hover {
+	border-width: 3px;
+	-webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from(black),
+		to(rgba(0, 0, 0, 0))) 1 100%;
+	-webkit-border-image: -webkit-linear-gradient(black, rgba(0, 0, 0, 0)) 1
+		100%;
+	-o-border-image: -o-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+	-moz-border-image: -moz-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
 }

@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="../js/core/jquery-ui-1.10.4.js"></script>
 	<script type="text/javascript" src="../js/core/jquery.json-2.4.min.js"></script>
 	<script type="text/javascript" src="../js/egov/common.js"></script>
-	<script type="text/javascript" src="../js/egov/user_register.js"></script>
+	<script type="text/javascript" src="../js/egov/payment.js"></script>
 	
   	<script>
   		$(function() {
@@ -25,14 +25,14 @@
 <body>
 <form>	
 	<label for="creditCardType">Choose Payment Type: </label>
-		<input type="radio" name="paymentType" value="credit card" id="credit_card"/><label for="credit_card">Credit Card</label>
+		<input type="radio" name="paymentType" value="credit_card" id="credit_card" checked="checked"/><label for="credit_card">Credit Card</label>
 		<input type="radio" name="paymentType" value="wire_transfer" id="wire_transfer"/><label for="wire_transfer">Wire transfer</label>
 		<input type="radio" name="paymentType" value="mobile_money" id="mobile_money"/><label for="mobile_money">Mobile Money</label>
 		<input type="radio" name="paymentType" value="counter" id="counter"/><label for="counter">Counter</label>
 	
 	
-	<div id="creditCard">
-		<fieldset>
+	<div id="credit_card" class="hidden">
+		<fieldset class="payment-fieldset">
 		<legend>Credit card information</legend>
 			
 		<label for="creditCardType">Credit Card Type: </label>
@@ -51,27 +51,24 @@
 		<label for="expiryDate">Expiry Date: </label>
 		<input type="text" name="expiryDate" id="expiryDate"/><br/>
 		
-		<label for="expiryDate">Verification code: </label>
+		<label for="verificationCode">Verification code: </label>
 		<input type="text" name="verificationCode" id="verificationCode"/><br/>
-		
-		<br>
+
 		<label for="creditCardIssuingInstitution"> Issuing institution: </label>
 		<input type="text" name="creditCardIssuingInstitution" id="creditCardIssuingInstitution"/><br/>
+		
 		</fieldset>
 	</div>
 
 
-	<div id="wireTransfer" class="hidden">
-		<fieldset>
+	<div id="wire_transfer" class="hidden">
+		<fieldset class="payment-fieldset">
 		<legend>Wire Transfer</legend>
 		<label for="bankAccountHolderName">Account Holder Name: </label>
 		<input type="text" name="bankAccountHolderName" id="bankAccountHolderName"/><br/>
 		
-		<label for="bankAccountHolderAddress">Account Holder's Address: </label>
-		<input type="text" name="bankAccountHolderAddress" id="bankAccountHolderAddress"/><br/>
-		
-		<label for="accountNumber">Account Number: </label>
-		<input type="text" name="accountNumber" id="accountNumber"/><br/>
+		<label for="bankAccountNumber">Account Number: </label>
+		<input type="text" name="bankAccountNumber" id="bankAccountNumber"/><br/>
 		
 		<label for="bankAccountPassword">Password: </label>
 		<input type="text" name="bankAccountPassword" id="bankAccountPassword"/><br/>
@@ -79,22 +76,19 @@
 		<label for="bankName">Bank Name: </label>
 		<input type="text" name="bankName" id="bankName"/><br/>
 		
-		<label for="branchName">Bank Name: </label>
+		<label for="branchName">Branch Name: </label>
 		<input type="text" name="branchName" id="branchName"/><br/>
 		
 		</fieldset>
 	</div>
 	
 	
-	<div id="mobileMoney" class="hidden">
-		<fieldset>
+	<div id="mobile_money" class="hidden">
+		<fieldset class="payment-fieldset">
 		<legend>Mobile Money</legend>
 					
 		<label for="mobileAccountHolderName">Account Holder Name: </label>
 		<input type="text" name="mobileAccountHolderName" id="mobileAccountHolderName"/><br/>
-		
-		<label for="mobileAccountHolderAddress">Account Holder's Address: </label>
-		<input type="text" name="mobileAccountHolderAddress" id="bankAccountHolderAddress"/><br/>
 		
 		<label for="mobileNumber">Mobile Number: </label>
 		<input type="text" name="mobileNumber" id="mobileNumber"/><br/>
@@ -112,11 +106,21 @@
 		<br/>
 		</fieldset>
 	</div>
+	 
+	 <div id="counter" class="hidden">
+		<fieldset class="payment-fieldset">
+		<legend>Already paid on the counter</legend>
+					
+		<label for="transactionNumber">Transaction Number: </label>
+		<input type="text" name="transactionNumber" id="transactionNumber"/><br/>
+		<br/>
+		</fieldset>
+	</div>
 	
-	<br><label for="paymentAmount">Password: </label>
+	<br><label for="paymentAmount"> Amount(in RWF): </label>
 	<input type="text" name="paymentAmount" id="paymentAmount"/><br/>
 	
-	<button id="form_submit" value="Make Payment">Make Payment</button>
+	<button id="form_submit" value="Make Payment" class="submit-button">Make Payment</button>
 	
 </form>
 </body>
