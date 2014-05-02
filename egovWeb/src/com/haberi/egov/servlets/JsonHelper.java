@@ -14,6 +14,7 @@ import com.haberi.egov.ejb.constants.IdentityPaperConstants;
 import com.haberi.egov.ejb.entities.dto.AccountDTO;
 import com.haberi.egov.ejb.entities.dto.AddressDTO;
 import com.haberi.egov.ejb.entities.dto.IdentityPaperDTO;
+import com.haberi.egov.ejb.entities.dto.PaymentDTO;
 import com.haberi.egov.ejb.enums.ContactMethodEnum;
 import com.haberi.egov.ejb.enums.CountryEnum;
 import com.haberi.egov.ejb.enums.IdentityTypeEnum;
@@ -168,5 +169,12 @@ public class JsonHelper {
 			jsonObject.addProperty(IdentityPaperConstants.EXPIRY_DATE, new SimpleDateFormat(DateConstants.DEFAULT_FORMAT).format(identityPaperDTO.getExpiryDate()));
 		}
 		return jsonObject;
+	}
+	
+	public PaymentDTO toPaymentDTO(JsonObject jsonObject){
+		PaymentDTO paymentDTO = null ; 
+		
+		return paymentDTO; 
+		
 	}
 }
