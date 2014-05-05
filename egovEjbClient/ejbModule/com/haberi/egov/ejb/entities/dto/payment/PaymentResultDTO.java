@@ -1,6 +1,7 @@
 package com.haberi.egov.ejb.entities.dto.payment;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.haberi.egov.ejb.entities.dto.PaymentDTO;
@@ -43,6 +44,9 @@ public class PaymentResultDTO implements Serializable {
 	 * @return the errors
 	 */
 	public List<String> getErrors() {
+		if(errors== null){
+			errors= new ArrayList<String>();
+		}
 		return errors;
 	}
 	/**

@@ -66,6 +66,7 @@ public class PaymentEntity implements Serializable {
 	 * only the last 4 digits of the credit card number
 	 */
 	private String creditCardNumber ; 
+	@Enumerated(EnumType.STRING)
 	private CreditCardTypeEnum creditCardType ; 
 	@Column(name="CC_ISSUING_INSTITUTION")
 	private String creditCardIssuingInstitution ; 

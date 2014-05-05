@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.haberi.egov.ejb.entities.dto.PaymentDTO;
+import com.haberi.egov.ejb.entities.dto.payment.PaymentResultDTO;
 import com.haberi.egov.ejb.session.payment.PaymentSessionLocal;
 import com.haberi.egov.servlets.JsonHelper;
 
@@ -41,8 +42,8 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String paymentType = request.getParameter("paymentType");
-		final String paymentAmount = request.getParameter("paymentAmount");
+//		final String paymentType = request.getParameter("paymentType");
+//		final String paymentAmount = request.getParameter("paymentAmount");
 		
 		final String paymentInfoStr = request.getParameter("paymentInfo");
 		System.out.println(request.getParameter("paymentInfo"));
@@ -50,6 +51,7 @@ public class PaymentServlet extends HttpServlet {
 		if(StringUtils.isNotBlank(paymentInfoStr)){
 			JsonObject paymentInfo =  JsonHelper.getInstance().toJsonObject(paymentInfoStr);
 			PaymentDTO paymentDTO = JsonHelper.getInstance().toPaymentDTO(paymentInfo);
+			PaymentResultDTO paymentResultDTO = paymentSessionLocal.makePayment(paymentDTO); 
 			
 		}
 		
