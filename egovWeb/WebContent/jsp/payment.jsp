@@ -42,6 +42,9 @@
 		<input type="radio" name="creditCardType" value="discover" id="discover"/><label for="discover">DISCOVER</label>
 		<input type="radio" name="creditCardType" value="maestro" id="maestro"/><label for="maestro">MAESTRO</label>
 		
+		<label for="creditCardHolderName">Credit Card Holder Name: </label>
+		<input type="text" name="creditCardHolderName" id="creditCardHolderName"/><br/>
+		
 		<label for="creditCardNumber">Credit Card Number: </label>
 		<input type="text" name="creditCardNumber" id="creditCardNumber"/><br/>
 		
@@ -96,8 +99,8 @@
 		<label for="mobileAccountPassword">Password: </label>
 		<input type="text" name="mobileAccountPassword" id="mobileAccountPassword"/><br/>
 		
-		<label for="serviceProvider">Mobile Service Provider: </label>
-		<select name="serviceProvider" id="serviceProvider">
+		<label for="mobileServiceProvider">Mobile Service Provider: </label>
+		<select name="mobileServiceProvider" id="mobileServiceProvider">
 			<option value="mtn">MTN</option>
 			<option value="tigo">TIGO</option>
 			<option value="airtel">AIRTEL</option>

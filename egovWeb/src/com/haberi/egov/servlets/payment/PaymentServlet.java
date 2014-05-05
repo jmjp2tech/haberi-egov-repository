@@ -1,6 +1,7 @@
 package com.haberi.egov.servlets.payment;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -9,7 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.haberi.egov.ejb.entities.dto.PaymentDTO;
 import com.haberi.egov.ejb.session.payment.PaymentSessionLocal;
+import com.haberi.egov.servlets.JsonHelper;
 
 /**
  * Servlet implementation class PaymentServlet
@@ -34,7 +41,25 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		final String paymentType = request.getParameter("paymentType");
+		final String paymentAmount = request.getParameter("paymentAmount");
+		
+		final String paymentInfoStr = request.getParameter("paymentInfo");
+		System.out.println(request.getParameter("paymentInfo"));
+		
+		if(StringUtils.isNotBlank(paymentInfoStr)){
+			JsonObject paymentInfo =  JsonHelper.getInstance().toJsonObject(paymentInfoStr);
+			PaymentDTO paymentDTO = JsonHelper.getInstance().toPaymentDTO(paymentInfo);
+			
+		}
+		
+		JsonObject jsonResponse = new JsonObject();
+		jsonResponse.addProperty("status", "success");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter(); 
+		out.print(jsonResponse);
+		out.flush();
+	
 	}
 
 	/**

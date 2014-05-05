@@ -2,6 +2,7 @@ package com.haberi.egov.ejb.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.haberi.egov.ejb.enums.CreditCardTypeEnum;
 import com.haberi.egov.ejb.enums.PaymentTypeEnum;
@@ -33,25 +37,31 @@ public class PaymentEntity implements Serializable {
 	private BigInteger transactionId ; 
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="accountId")
+	@JoinColumn(referencedColumnName="accountId", nullable=true)
 	private AccountEntity accountEntity ; 
 	
 	@OneToOne
-	@JoinColumn(referencedColumnName="caseId")
+	@JoinColumn(referencedColumnName="caseId", nullable=true)
 	private CaseEntity caseEntity ; 
 
 	@Enumerated(EnumType.STRING)
 	private PaymentTypeEnum paymentType; 
+	@Temporal(TemporalType.DATE)
+	private Date paymentDate ; 
 	
-	
-	//payment by bank transfer
+	//payment by wire transfer
+	private String bankAccountHolderName; 
 	/**
 	 * only the last 4 digits of the account number
 	 */
-	private String accountNumber ;
+	private String bankAccountNumber ;
 	private String bankName ;
+	private String branchName;
+	@Transient
+	private String bankAccountPassword; 
 	
 	//payment by credit card
+	private String creditCardHolderName;
 	/**
 	 * only the last 4 digits of the credit card number
 	 */
@@ -59,10 +69,21 @@ public class PaymentEntity implements Serializable {
 	private CreditCardTypeEnum creditCardType ; 
 	@Column(name="CC_ISSUING_INSTITUTION")
 	private String creditCardIssuingInstitution ; 
+	@Transient
+	private String creditCardPassword;
+	@Transient
+	private Date expiryDate ; 
+	@Transient
+	private String  verificationCode; 
+	
 	
 	//payment by mobile money
+	private String mobileAccountHolderName;
 	private String mobileNumber ; 
-	private String mobileProvider; 
+	private String mobileProvider;
+	private String mobileServiceProvider;
+	@Transient
+	private String mobileAccountPassword; 
 	
 	//payment in cash , on the counter.
 	private String receiverName ; 
@@ -102,18 +123,6 @@ public class PaymentEntity implements Serializable {
 	 */
 	public void setPaymentType(PaymentTypeEnum paymentType) {
 		this.paymentType = paymentType;
-	}
-	/**
-	 * @return the accountNumber
-	 */
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-	/**
-	 * @param accountNumber the accountNumber to set
-	 */
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
 	}
 	/**
 	 * @return the bankName
@@ -222,5 +231,151 @@ public class PaymentEntity implements Serializable {
 	 */
 	public void setCounterId(String counterId) {
 		this.counterId = counterId;
+	}
+	/**
+	 * @return the paymentDate
+	 */
+	public Date getPaymentDate() {
+		return paymentDate;
+	}
+	/**
+	 * @param paymentDate the paymentDate to set
+	 */
+	public void setPaymentDate(Date paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+	/**
+	 * @return the bankAccountHolderName
+	 */
+	public String getBankAccountHolderName() {
+		return bankAccountHolderName;
+	}
+	/**
+	 * @param bankAccountHolderName the bankAccountHolderName to set
+	 */
+	public void setBankAccountHolderName(String bankAccountHolderName) {
+		this.bankAccountHolderName = bankAccountHolderName;
+	}
+	/**
+	 * @return the bankAccountNumber
+	 */
+	public String getBankAccountNumber() {
+		return bankAccountNumber;
+	}
+	/**
+	 * @param bankAccountNumber the bankAccountNumber to set
+	 */
+	public void setBankAccountNumber(String bankAccountNumber) {
+		this.bankAccountNumber = bankAccountNumber;
+	}
+	/**
+	 * @return the branchName
+	 */
+	public String getBranchName() {
+		return branchName;
+	}
+	/**
+	 * @param branchName the branchName to set
+	 */
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	/**
+	 * @return the bankAccountPassword
+	 */
+	public String getBankAccountPassword() {
+		return bankAccountPassword;
+	}
+	/**
+	 * @param bankAccountPassword the bankAccountPassword to set
+	 */
+	public void setBankAccountPassword(String bankAccountPassword) {
+		this.bankAccountPassword = bankAccountPassword;
+	}
+	/**
+	 * @return the creditCardHolderName
+	 */
+	public String getCreditCardHolderName() {
+		return creditCardHolderName;
+	}
+	/**
+	 * @param creditCardHolderName the creditCardHolderName to set
+	 */
+	public void setCreditCardHolderName(String creditCardHolderName) {
+		this.creditCardHolderName = creditCardHolderName;
+	}
+	/**
+	 * @return the creditCardPassword
+	 */
+	public String getCreditCardPassword() {
+		return creditCardPassword;
+	}
+	/**
+	 * @param creditCardPassword the creditCardPassword to set
+	 */
+	public void setCreditCardPassword(String creditCardPassword) {
+		this.creditCardPassword = creditCardPassword;
+	}
+	/**
+	 * @return the expiryDate
+	 */
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+	/**
+	 * @param expiryDate the expiryDate to set
+	 */
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+	/**
+	 * @return the verificationCode
+	 */
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+	/**
+	 * @param verificationCode the verificationCode to set
+	 */
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+	/**
+	 * @return the mobileAccountHolderName
+	 */
+	public String getMobileAccountHolderName() {
+		return mobileAccountHolderName;
+	}
+	/**
+	 * @param mobileAccountHolderName the mobileAccountHolderName to set
+	 */
+	public void setMobileAccountHolderName(String mobileAccountHolderName) {
+		this.mobileAccountHolderName = mobileAccountHolderName;
+	}
+	/**
+	 * @return the mobileServiceProvider
+	 */
+	public String getMobileServiceProvider() {
+		return mobileServiceProvider;
+	}
+	/**
+	 * @param mobileServiceProvider the mobileServiceProvider to set
+	 */
+	public void setMobileServiceProvider(String mobileServiceProvider) {
+		this.mobileServiceProvider = mobileServiceProvider;
+	}
+	/**
+	 * @return the mobileAccountPassword
+	 */
+	public String getMobileAccountPassword() {
+		return mobileAccountPassword;
+	}
+	/**
+	 * @param mobileAccountPassword the mobileAccountPassword to set
+	 */
+	public void setMobileAccountPassword(String mobileAccountPassword) {
+		this.mobileAccountPassword = mobileAccountPassword;
 	} 
+	
+	
 }

@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import sun.org.mozilla.javascript.internal.annotations.JSConstructor;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -11,16 +13,20 @@ import com.haberi.egov.ejb.constants.AccountConstants;
 import com.haberi.egov.ejb.constants.AddressConstants;
 import com.haberi.egov.ejb.constants.DateConstants;
 import com.haberi.egov.ejb.constants.IdentityPaperConstants;
+import com.haberi.egov.ejb.constants.PaymentConstants;
 import com.haberi.egov.ejb.entities.dto.AccountDTO;
 import com.haberi.egov.ejb.entities.dto.AddressDTO;
 import com.haberi.egov.ejb.entities.dto.IdentityPaperDTO;
 import com.haberi.egov.ejb.entities.dto.PaymentDTO;
 import com.haberi.egov.ejb.enums.ContactMethodEnum;
 import com.haberi.egov.ejb.enums.CountryEnum;
+import com.haberi.egov.ejb.enums.CreditCardTypeEnum;
 import com.haberi.egov.ejb.enums.IdentityTypeEnum;
 import com.haberi.egov.ejb.enums.OccupationEnum;
+import com.haberi.egov.ejb.enums.PaymentTypeEnum;
 import com.haberi.egov.ejb.enums.SexEnum;
 import com.haberi.egov.ejb.enums.UserTypeEnum;
+import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
 
 public class JsonHelper {
 
@@ -111,7 +117,7 @@ public class JsonHelper {
 		return identityPaperDTO;
 	}
 	
-	private Date getDate(String dateString , String dateFormat) throws ParseException{
+	public Date getDate(String dateString , String dateFormat) throws ParseException{
 		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat); 
 		return formatter.parse(dateString);
 	}
@@ -173,8 +179,45 @@ public class JsonHelper {
 	
 	public PaymentDTO toPaymentDTO(JsonObject jsonObject){
 		PaymentDTO paymentDTO = null ; 
+		if(jsonObject != null){
+			paymentDTO = new PaymentDTO(); 
+			final String paymentType  =  jsonObject.get(PaymentConstants.PAYMENT_TYPE).getAsString();
+			System.out.println(paymentType);
+			paymentDTO.setPaymentType(PaymentTypeEnum.getEnum(paymentType));
+			
+			switch (paymentDTO.getPaymentType()) {
+			case CREDIT_CARD:{
+				paymentDTO.setCreditCardType(CreditCardTypeEnum.getEnum(jsonObject.get(PaymentConstants.CREDIT_CARD_TYPE).getAsString()));
+				paymentDTO.setCreditCardHolderName(jsonObject.get(PaymentConstants.CREDIT_CARD_HOLDER_NAME).getAsString());
+				paymentDTO.setCreditCardNumber(jsonObject.get(PaymentConstants.CREDIT_CARD_NUMBER).getAsString());
+				paymentDTO.setCreditCardPassword(jsonObject.get(PaymentConstants.CREDIT_CARD_PASSWORD).getAsString());
+				try {
+					paymentDTO.setExpiryDate(getDate(jsonObject.get(PaymentConstants.EXPPIRY_DATE).getAsString(), DateConstants.DEFAULT_FORMAT));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				paymentDTO.setVerificationCode(jsonObject.get(PaymentConstants.VERIFICATION_CODE).getAsString());
+				paymentDTO.setCreditCardIssuingInstitution(jsonObject.get(PaymentConstants.CREDIT_CARD_ISSUING_INSTITUTION).getAsString());
+				
+				break;
+			}
+			
+			case WIRE_TRANSFER: {
+				paymentDTO.setBankAccountHolderName(jsonObject.get(PaymentConstants.BANK_ACCOUNT_HOLDER_NAME).getAsString());
+				paymentDTO.setBankAccountNumber(jsonObject.get(PaymentConstants.BANK_ACCOUNT_NUMBER).getAsString());
+				paymentDTO.setBankAccountPassword(jsonObject.get(PaymentConstants.BANK_ACCOUNT_PASSWORD).getAsString());
+				paymentDTO.setBankName(jsonObject.get(PaymentConstants.BANK_NAME).getAsString());
+				paymentDTO.setBranchName(jsonObject.get(PaymentConstants.BRANCH_NAME).getAsString());
+				break; 
+			}
+
+			default:
+				break;
+			}
+		}
 		
-		return paymentDTO; 
-		
+		return paymentDTO;
 	}
 }
