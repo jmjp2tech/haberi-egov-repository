@@ -124,7 +124,6 @@
 	<input type="text" name="paymentAmount" id="paymentAmount"/><br/>
 	
 	<button id="form_submit" value="Make Payment" class="submit-button">Make Payment</button>
-	
 </form>
 </body>
 </html>

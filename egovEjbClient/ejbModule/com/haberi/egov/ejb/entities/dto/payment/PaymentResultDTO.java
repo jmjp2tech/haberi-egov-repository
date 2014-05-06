@@ -14,7 +14,7 @@ public class PaymentResultDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 8770219348456340645L;
 	private PaymentDTO paymentDTO  ; 
-	private ResultTypeEnum ResultTypeEnum; 
+	private ResultTypeEnum resultType; 
 	private List<String> errors;
 	/**
 	 * @return the paymentDTO
@@ -27,18 +27,6 @@ public class PaymentResultDTO implements Serializable {
 	 */
 	public void setPaymentDTO(PaymentDTO paymentDTO) {
 		this.paymentDTO = paymentDTO;
-	}
-	/**
-	 * @return the resultTypeEnum
-	 */
-	public ResultTypeEnum getResultTypeEnum() {
-		return ResultTypeEnum;
-	}
-	/**
-	 * @param resultTypeEnum the resultTypeEnum to set
-	 */
-	public void setResultTypeEnum(ResultTypeEnum resultTypeEnum) {
-		ResultTypeEnum = resultTypeEnum;
 	}
 	/**
 	 * @return the errors
@@ -54,5 +42,17 @@ public class PaymentResultDTO implements Serializable {
 	 */
 	public void setErrors(List<String> errors) {
 		this.errors = errors;
+	}
+	/**
+	 * @return the resultType
+	 */
+	public ResultTypeEnum getResultType() {
+		return resultType;
+	}
+	/**
+	 * @param resultType the resultType to set
+	 */
+	public void setResultType(ResultTypeEnum resultType) {
+		this.resultType = resultType;
 	}
 }

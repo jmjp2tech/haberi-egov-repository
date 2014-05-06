@@ -77,7 +77,6 @@ public class PaymentEntity implements Serializable {
 	@Transient
 	private String  verificationCode; 
 	
-	
 	//payment by mobile money
 	private String mobileAccountHolderName;
 	private String mobileNumber ; 

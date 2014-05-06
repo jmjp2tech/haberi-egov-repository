@@ -24,12 +24,12 @@ public class PaymentSessionBean implements PaymentSessionLocal {
 		
 		try{
 			PaymentEntity resultEntity = em.merge(paymentEntity);
-			paymentResultDTO.setResultTypeEnum(ResultTypeEnum.SUCCESS);
+			paymentResultDTO.setResultType(ResultTypeEnum.SUCCESS);
 			paymentResultDTO.getErrors().clear();
 			paymentDTO.setTransactionId(resultEntity.getTransactionId());
 			paymentResultDTO.setPaymentDTO(paymentDTO);
 		}catch(Exception exception){
-			paymentResultDTO.setResultTypeEnum(ResultTypeEnum.FAILURE);
+			paymentResultDTO.setResultType(ResultTypeEnum.FAILURE);
 			paymentResultDTO.getErrors().add("An error occured in the process of persisting the payment information to database");
 			paymentDTO.setTransactionId(null);
 			paymentResultDTO.setPaymentDTO(paymentDTO);
