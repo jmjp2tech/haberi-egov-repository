@@ -3,11 +3,18 @@ package com.haberi.egov.ejb.entities;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,12 +34,38 @@ public class CaseEntity implements Serializable{
 	private BigInteger caseId ;
 	
 	@OneToOne
+	private PaymentEntity paymentEntity ;
 	
-	private PaymentEntity paymentEntity ; 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(referencedColumnName="accountId")
 	private AccountEntity accountEntity ;
 	
 	@Temporal(TemporalType.DATE)
 	private Date creationDate; 
+	
+	@Temporal(TemporalType.DATE)
+	private Date expectedCloseDate ; 
+	
+	@Temporal(TemporalType.DATE)
+	private Date actualCloseDate ;
+	
+	@Enumerated(EnumType.STRING)
+	private ServiceTypeEnum serviceType ; 
+	
+	@Enumerated(EnumType.STRING)
+	private CaseStatusEnum caseStatus ;
+	
+	@ManyToOne
+	@JoinColumn(name="agentId")
+	private CaseAgentEntity currentCaseAgent ;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	private Set<CaseSupportDocumentEntity> supportingDocuments; 
+	
+	@OneToMany
+	private Set<AgentNoteEntity> agentNotes;
+	
+	
 	
 	/**
 	 * @return the caseId

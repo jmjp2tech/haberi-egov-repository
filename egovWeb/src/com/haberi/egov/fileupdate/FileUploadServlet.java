@@ -3,6 +3,7 @@ package com.haberi.egov.fileupdate;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -15,6 +16,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+
 @WebServlet(value ="/FileUploadServlet", initParams={
 		@WebInitParam(name="file-upload",value="C:/file-upload",description="where the case-related files are stored")
 } )
@@ -26,14 +28,39 @@ public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = -7435367213624554548L;
 	private boolean isMultipart;
 	private String filePath;
-	private int maxFileSize = 5000 * 1024;
-	private int maxMemSize = 4 * 1024;
+	private String tempPath; 
+	private int maxFileSize;
+	private int maxMemSize ;
 	private File file;
+	private File uploadDirectory;
+	private File tempDirectory;
+	
 
 	public void init() {
 		// Get the file location where it would be stored.
 //		filePath = getServletContext().getInitParameter("file-upload");
-		filePath = "C:/file-upload";
+		Properties props = new Properties(); 
+		try {
+			props.load(getServletContext().getResourceAsStream("/WEB-INF/file.upload.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		filePath = props.getProperty("upload.dir"); 
+		maxFileSize=Integer.parseInt(props.getProperty("upload.max.file.size"));
+		maxMemSize = Integer.parseInt(props.getProperty("upload.max.mem.size"));
+		tempPath = props.getProperty("upload.temp");
+		
+		uploadDirectory = new File(filePath); 
+		tempDirectory = new File(tempPath);
+		if(!(uploadDirectory.exists() && uploadDirectory.isDirectory())){
+			uploadDirectory.mkdirs();
+		}
+		
+		if(!(tempDirectory.exists() && tempDirectory.isDirectory())){
+			tempDirectory.mkdirs();
+		}
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,7 +84,7 @@ public class FileUploadServlet extends HttpServlet {
 		// maximum size that will be stored in memory
 		factory.setSizeThreshold(maxMemSize);
 		// Location to save data that is larger than maxMemSize.
-		factory.setRepository(new File("c:\\temp"));
+		factory.setRepository(tempDirectory);
 
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);

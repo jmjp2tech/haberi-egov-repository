@@ -8,10 +8,12 @@
 </head>
 <body>
 	<h3>File Upload:</h3>
+	
+	<img src="../img/Rwanda_240-animated-flag-gifs.gif"/><br/>
+	
 	Select a file to upload:
-	<img src="Rwanda_240-animated-flag-gifs.gif"/>
 	<br />
-	<form action="/emailWeb/FileUploadServlet" method="post" enctype="multipart/form-data">
+	<form action="/egovWeb/FileUploadServlet" method="post" enctype="multipart/form-data">
 		<input type="file" name="file" size="50" /> <br /> 
 		<input type="submit" value="Upload File" />
 	</form>
