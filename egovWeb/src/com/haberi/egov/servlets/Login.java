@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
-import javax.print.attribute.HashAttributeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +21,7 @@ import com.haberi.egov.ejb.constants.AccountConstants;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
 import com.haberi.egov.ejb.session.AuthenticationSessionLocal;
+import com.haberi.egov.ejb.utils.JsonHelper;
 
 /**
  * Servlet implementation class Login

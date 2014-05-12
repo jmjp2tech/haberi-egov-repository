@@ -15,6 +15,7 @@ import com.haberi.egov.ejb.entities.dto.AccountDTO;
 import com.haberi.egov.ejb.entities.dto.UserDTO;
 import com.haberi.egov.ejb.enums.UserStatusEnum;
 import com.haberi.egov.ejb.session.AuthenticationSessionLocal;
+import com.haberi.egov.ejb.utils.JsonHelper;
 
 /**
  * Servlet implementation class Register

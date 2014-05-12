@@ -1,4 +1,4 @@
-package com.haberi.egov.ejb.entities;
+package com.haberi.egov.ejb.enums;
 
 import org.apache.commons.lang3.StringUtils;
 

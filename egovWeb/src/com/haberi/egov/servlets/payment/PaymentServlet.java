@@ -21,7 +21,7 @@ import com.google.gson.JsonParser;
 import com.haberi.egov.ejb.entities.dto.PaymentDTO;
 import com.haberi.egov.ejb.entities.dto.payment.PaymentResultDTO;
 import com.haberi.egov.ejb.session.payment.PaymentSessionLocal;
-import com.haberi.egov.servlets.JsonHelper;
+import com.haberi.egov.ejb.utils.JsonHelper;
 
 /**
  * Servlet implementation class PaymentServlet
