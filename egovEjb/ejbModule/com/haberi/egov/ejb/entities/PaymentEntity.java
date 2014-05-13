@@ -37,15 +37,15 @@ public class PaymentEntity implements Serializable {
 	private BigInteger transactionId ; 
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="accountId", nullable=true)
+	@JoinColumn(name="accountId",referencedColumnName="accountId", nullable=true)
 	private AccountEntity accountEntity ; 
 	
-	@OneToOne
-	@JoinColumn(referencedColumnName="caseId", nullable=true)
+	@OneToOne(mappedBy="paymentEntity")
 	private CaseEntity caseEntity ; 
 
 	@Enumerated(EnumType.STRING)
 	private PaymentTypeEnum paymentType; 
+	
 	@Temporal(TemporalType.DATE)
 	private Date paymentDate ; 
 	

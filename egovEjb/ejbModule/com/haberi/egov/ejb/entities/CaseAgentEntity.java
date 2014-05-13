@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,7 +37,10 @@ public class CaseAgentEntity implements Serializable{
 	private DepartmentEnum department; 
 	
 	@OneToMany(mappedBy="currentCaseAgent")
-	private Set<CaseEntity> cases;
+	private Set<CaseEntity> currentCases;
+	
+	@ManyToMany(mappedBy="caseAgents")
+	private Set<CaseEntity> allCases; 
 
 	public BigInteger getAgentId() {
 		return agentId;
@@ -76,16 +80,7 @@ public class CaseAgentEntity implements Serializable{
 
 	public void setDepartment(DepartmentEnum department) {
 		this.department = department;
-	}
-
-	public Set<CaseEntity> getCases() {
-		return cases;
-	}
-
-	public void setCases(Set<CaseEntity> cases) {
-		this.cases = cases;
-	} 
-	
+	}	
 	
 	
 }

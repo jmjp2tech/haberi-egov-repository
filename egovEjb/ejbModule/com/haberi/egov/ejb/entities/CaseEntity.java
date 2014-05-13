@@ -12,8 +12,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,12 +24,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.glassfish.api.admin.AccessRequired.To;
-
 import com.haberi.egov.ejb.enums.CaseStatusEnum;
 import com.haberi.egov.ejb.enums.ServiceTypeEnum;
 
 @Entity
+@IdClass(com.haberi.egov.ejb.entities.CasePK.class)
 @Table(name="EGOV_CASES")
 public class CaseEntity implements Serializable{
 
@@ -36,14 +38,18 @@ public class CaseEntity implements Serializable{
 	private static final long serialVersionUID = -8045809367548003058L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private BigInteger caseId ;
 	
+	@Id
+	private int version ; 
+	
 	@OneToOne
+	@JoinColumn(name="transactionId",referencedColumnName="transactionId", nullable=true)
 	private PaymentEntity paymentEntity ;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(referencedColumnName="accountId")
+	@JoinColumn(name="accountId", referencedColumnName="accountId")
 	private AccountEntity accountEntity ;
 	
 	@Temporal(TemporalType.DATE)
@@ -65,17 +71,21 @@ public class CaseEntity implements Serializable{
 	@JoinColumn(name="agentId")
 	private CaseAgentEntity currentCaseAgent ;
 	
-	/** TO DO: Many to many for past agents, for historical traceability **/
+	@ManyToMany
+	@JoinTable(name="EGOV_CASE_AGENT", 
+		joinColumns={@JoinColumn(name="caseId" , referencedColumnName="caseId"), @JoinColumn(name="version" , referencedColumnName="version")},
+		inverseJoinColumns={@JoinColumn(name="agentId" , referencedColumnName="agentId")})
+	private Set<CaseAgentEntity> caseAgents; 
 	
 	//supporting documents: uploaded by the user for update , downloaded by the agent for verification
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="caseEntity")
 	private Set<CaseSupportDocumentEntity> supportingDocuments; 
 	
-	// saved as an XML string
+	//saved as an XML string
 	@Lob
 	private String userNotes;
 		
-	// saved as an XML string
+	//saved as an XML string
 	@Lob
 	private String agentNotes; 
 	
@@ -91,6 +101,7 @@ public class CaseEntity implements Serializable{
 	public void setCaseId(BigInteger caseId) {
 		this.caseId = caseId;
 	}
+	
 	/**
 	 * @return the paymentEntity
 	 */
@@ -224,7 +235,29 @@ public class CaseEntity implements Serializable{
 	public void setAgentNotes(String agentNotes) {
 		this.agentNotes = agentNotes;
 	}
-	
-	
+	/**
+	 * @return the version
+	 */
+	public int getVersion() {
+		return version;
+	}
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	/**
+	 * @return the caseAgents
+	 */
+	public Set<CaseAgentEntity> getCaseAgents() {
+		return caseAgents;
+	}
+	/**
+	 * @param caseAgents the caseAgents to set
+	 */
+	public void setCaseAgents(Set<CaseAgentEntity> caseAgents) {
+		this.caseAgents = caseAgents;
+	}
 	
 }
