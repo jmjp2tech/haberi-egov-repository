@@ -32,7 +32,8 @@ public class CaseDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = -8045809367548003058L;
 	
-	private BigInteger caseId ;
+	private String caseId ;
+	private int version;
 	private PaymentDTO paymentDTO ;
 	private AccountDTO accountDTO ;
 	private Date creationDate; 
@@ -44,17 +45,57 @@ public class CaseDTO implements Serializable{
 	private Set<CaseSupportDocumentDTO> supportingDocuments; 
 	private NotesDTO userNotes;
 	private NotesDTO agentNotes;
+	private String name;
+	private  String description;
+	
+	
 	/**
 	 * @return the caseId
 	 */
-	public BigInteger getCaseId() {
+	public String getCaseId() {
 		return caseId;
 	}
 	/**
 	 * @param caseId the caseId to set
 	 */
-	public void setCaseId(BigInteger caseId) {
+	public void setCaseId(String caseId) {
 		this.caseId = caseId;
+	}
+	/**
+	 * @return the version
+	 */
+	public int getVersion() {
+		return version;
+	}
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	/**
 	 * @return the paymentDTO

@@ -15,4 +15,8 @@ public class CaseConstants {
 	public static final String SUPPORTING_DOCUMENTS="supportingDocuments"; 
 	public static final String USER_NOTES="UserNotes";
 	public static final String AGENT_NOTES= "agentNotes";
+	public static final String VERSION = "version";
+	public static final String NAME="name";
+	public static final String DESCRIPTION ="description";
+	
 }

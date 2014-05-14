@@ -429,9 +429,11 @@ public class JsonHelper {
 			caseDTO = new CaseDTO() ; 
 			
 			if(jsonObject.has(CaseConstants.CASE_ID) && StringUtils.isNotBlank(jsonObject.get(CaseConstants.CASE_ID).getAsString())){
-				BigInteger id = jsonObject.get(CaseConstants.CASE_ID).getAsBigInteger(); 
-				if(BigInteger.ZERO.compareTo(id) != 0){
-					caseDTO.setCaseId(id);
+				caseDTO.setCaseId(jsonObject.get(CaseConstants.CASE_ID).getAsString());
+				if(jsonObject.has(CaseConstants.VERSION)){
+					caseDTO.setVersion(jsonObject.get(CaseConstants.VERSION).getAsInt());
+				}else{
+					caseDTO.setVersion(1);
 				}
 			}
 			
@@ -465,6 +467,8 @@ public class JsonHelper {
 			
 			caseDTO.setUserNotes(toNotesDTO(jsonObject.get(CaseConstants.USER_NOTES).getAsJsonArray()));
 			caseDTO.setAgentNotes(toNotesDTO(jsonObject.get(CaseConstants.AGENT_NOTES).getAsJsonArray()));
+			caseDTO.setName(jsonObject.get(CaseConstants.NAME).getAsString());
+			caseDTO.setDescription(jsonObject.get(CaseConstants.DESCRIPTION).getAsString());
 		}
 		return caseDTO; 
 	}

@@ -1,18 +1,14 @@
 package com.haberi.egov.ejb.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -28,7 +24,6 @@ import com.haberi.egov.ejb.enums.CaseStatusEnum;
 import com.haberi.egov.ejb.enums.ServiceTypeEnum;
 
 @Entity
-@IdClass(com.haberi.egov.ejb.entities.CasePK.class)
 @Table(name="EGOV_CASES")
 public class CaseEntity implements Serializable{
 
@@ -37,12 +32,8 @@ public class CaseEntity implements Serializable{
 	 */
 	private static final long serialVersionUID = -8045809367548003058L;
 	
-	@Id
-	//@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private BigInteger caseId ;
-	
-	@Id
-	private int version ; 
+	@EmbeddedId
+	private CasePK casePK ; 
 	
 	@OneToOne
 	@JoinColumn(name="transactionId",referencedColumnName="transactionId", nullable=true)
@@ -87,21 +78,40 @@ public class CaseEntity implements Serializable{
 		
 	//saved as an XML string
 	@Lob
-	private String agentNotes; 
+	private String agentNotes;
+	
+	//readable short name to display on the front-end 
+	private String name; 
+	
+	////readable short name to display on the front-end 
+	private String description; 
+	
+	
 	
 	/**
-	 * @return the caseId
+	 * @return the name
 	 */
-	public BigInteger getCaseId() {
-		return caseId;
+	public String getName() {
+		return name;
 	}
 	/**
-	 * @param caseId the caseId to set
+	 * @param name the name to set
 	 */
-	public void setCaseId(BigInteger caseId) {
-		this.caseId = caseId;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	/**
 	 * @return the paymentEntity
 	 */
@@ -235,18 +245,7 @@ public class CaseEntity implements Serializable{
 	public void setAgentNotes(String agentNotes) {
 		this.agentNotes = agentNotes;
 	}
-	/**
-	 * @return the version
-	 */
-	public int getVersion() {
-		return version;
-	}
-	/**
-	 * @param version the version to set
-	 */
-	public void setVersion(int version) {
-		this.version = version;
-	}
+	
 	/**
 	 * @return the caseAgents
 	 */
@@ -259,5 +258,19 @@ public class CaseEntity implements Serializable{
 	public void setCaseAgents(Set<CaseAgentEntity> caseAgents) {
 		this.caseAgents = caseAgents;
 	}
+	/**
+	 * @return the casePK
+	 */
+	public CasePK getCasePK() {
+		return casePK;
+	}
+	/**
+	 * @param casePK the casePK to set
+	 */
+	public void setCasePK(CasePK casePK) {
+		this.casePK = casePK;
+	}
+	
+	
 	
 }
